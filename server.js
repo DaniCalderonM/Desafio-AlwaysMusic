@@ -65,7 +65,11 @@ const validarRut = (rut) => {
 const getEstudiantes = async () => {
     try {
         const res = await pool.query("SELECT * FROM estudiantes");
-        console.log("Registro actual de Estudiantes:", res.rows);
+        if (res.rows != 0) {
+            console.log("Registro actual de Estudiantes:", res.rows);
+        } else {
+            console.log("No hay registros de estudiantes");
+        }
     } catch (error) {
         // manejo general de errores
         manejoErrores(error, pool, 'estudiantes');
@@ -130,9 +134,9 @@ const editarEstudiante = async ({ nombre, rut, curso, nivel }) => {
             console.log("Estudiante Editado: ", res.rows[0]);
         }
     } catch (error) {
-    // manejo general de errores
-    manejoErrores(error, pool, 'estudiantes');
-}
+        // manejo general de errores
+        manejoErrores(error, pool, 'estudiantes');
+    }
 }
 //Funcion para eliminar un estudiante por su rut
 const eliminarEstudiante = async ({ rut }) => {
