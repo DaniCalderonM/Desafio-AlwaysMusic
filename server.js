@@ -144,13 +144,15 @@ const eliminarEstudiante = async ({ rut }) => {
         const res = await pool.query(
             `DELETE FROM estudiantes where rut = $1 RETURNING *`, [rut]
         );
+        console.log("valor de res.rows: ", res.rows);
+        console.log("valor de res.rowCount: ", res.rowCount);
         if (!rut) {
             console.log("Debe ingresar el campo rut")
         }
         else if (!validarRut(rut)) {
             console.log("El rut ingresado no tiene el formato correcto, ejemplo: 11.111.111-1")
         }
-        else if (res.rows == 0) {
+        else if (res.rowCount == 0 ) {
             console.log("El rut ingresado no existe");
         } else {
             console.log(`Registro de Estudiante con rut ${rut} eliminado con éxito`);
@@ -183,14 +185,14 @@ const eliminarEstudiante = async ({ rut }) => {
         default:
             console.log("Funcion: " + funcion + " no es valida")
             break;
-    }
+    } //crear un objeto
 
     pool.end()
 })()
 
 // instrucciones de uso:
-// ingresar nuevo estudiante: node server nuevo 'Pedro Paramo' '13.245.003-8' 'Biologia' 5
+// ingresar nuevo estudiante: node server nuevo PedroParamo 13.245.003-8 Biologia 5
 // consultar todos: node server consulta
-// consultar por rut: node server rut - '13.245.003-8'
+// consultar por rut: node server rut - 13.245.003-8
 // editar estudiante por nombre: node server editar 'Pedro Paramo' '13.245.123-5' 'Biologia II' 8
 // eliminar estudiante por rut:  node server eliminar - '13.245.123-5'
