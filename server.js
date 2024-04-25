@@ -185,14 +185,14 @@ const eliminarEstudiante = async ({ rut }) => {
         default:
             console.log("Funcion: " + funcion + " no es valida")
             break;
-    } //crear un objeto
+    }
 
     pool.end()
 })()
 
 // instrucciones de uso:
-// ingresar nuevo estudiante: node server nuevo PedroParamo 13.245.003-8 Biologia 5
+// ingresar nuevo estudiante: node server nuevo 'Pedro Paramo' '13.245.003-8' 'Biologia' 5
 // consultar todos: node server consulta
-// consultar por rut: node server rut - 13.245.003-8
+// consultar por rut: node server rut - '13.245.003-8'
 // editar estudiante por nombre: node server editar 'Pedro Paramo' '13.245.123-5' 'Biologia II' 8
 // eliminar estudiante por rut:  node server eliminar - '13.245.123-5'
